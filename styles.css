@@ -1,0 +1,31 @@
+.shape-container {
+    width: 200px;
+    height: 400px;
+    display: inline-block;
+}
+
+.shape-container > div {
+    margin: 10px auto;
+}
+
+#square {
+    height: 50px;
+    width: 50px;
+}
+
+#circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.canvas-container {
+    border: 1px solid gray;
+    display: inline-block;
+}
+
+*[draggable=true] {
+    -moz-user-select:none;
+    -khtml-user-drag: element;
+    cursor: move;
+}
