@@ -4,9 +4,9 @@ class Composer {
             new WizardContainer('div', 'container', new BrandsService());
         destinationElement.appendChild(wizardContainer.mainNode);
 
-        wizardContainer.init(function(e) {
-            console.log(e);
-        });
+        // wizardContainer.init(function(e) {
+        //     console.log(e);
+        // });
         wizardContainer.showCurrentTab();
         // debugger
         // wizardContainer.nextTab();

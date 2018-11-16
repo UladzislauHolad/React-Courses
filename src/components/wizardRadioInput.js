@@ -1,19 +1,22 @@
 class WizardRadioInput {
     constructor(name, value, checkedCallback) {
         let p = document.createElement('p');
+        let id = `${name}-${value}`;
 
-        // let label = document.createElement('label');
-        // label.setAttribute('for', name);
-        
         let input = document.createElement('input');
         input.setAttribute('type', 'radio');
         input.setAttribute('name', name);
         input.setAttribute('value', value);
-        input.onchange = checkedCallback;
+        input.setAttribute('id', id);
+        input.addEventListener('change', checkedCallback)
         p.appendChild(input);
 
-        let text = document.createTextNode(value);
-        p.appendChild(text);
+        let label = document.createElement('label');
+        let labelText = document.createTextNode(value);
+        label.setAttribute('for', id);
+        label.appendChild(labelText);
+       
+        p.appendChild(label);
 
         this.node = p;
     }    
