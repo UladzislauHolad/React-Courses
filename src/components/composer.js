@@ -1,7 +1,13 @@
 class Composer {
     compose(destinationElement) {
+        let services = [
+            new BrandsService(),
+            new ModelsService(),
+            new TransmissionTypesService(),
+            new FuelTypesService()
+        ];
         let wizardContainer = 
-            new WizardContainer('div', 'container', new BrandsService());
+            new WizardContainer('div', 'container', ...services);
         destinationElement.appendChild(wizardContainer.mainNode);
 
         // wizardContainer.init(function(e) {

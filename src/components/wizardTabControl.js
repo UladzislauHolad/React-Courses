@@ -11,7 +11,15 @@ class WizardTabControl {
         this.node.disabled = true;
     }
 
+    enable() {
+        this.node.disabled = false;
+    }
+
     hide() {
         this.node.hidden = true;
+    }
+
+    show() {
+        this.node.hidden = false;
     }
 }
