@@ -31,7 +31,11 @@
     /* border: 1px solid #aaaaaa; */
   }
   
- 
+  ul { 
+    list-style: none; 
+    padding: 0;
+  }
+
   /* Hide all steps by default: */
   /* .tab {
     display: none;
@@ -46,15 +50,20 @@
     /* font-family: Raleway; */
     cursor: pointer;
   }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   
+  button:disabled:hover {
+    opacity: 0.5;
+  }
+
   button:hover {
     opacity: 0.8;
   }
-  
-  #prev-btn {
-    background-color: #bbbbbb;
-  }
-  
+
   /* Make circles that indicate the steps of the form: */
   .step {
     height: 15px;

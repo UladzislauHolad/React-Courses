@@ -1,5 +1,5 @@
 class WizardRadioInput {
-    constructor(name, value, checkedCallback) {
+    constructor(name, value, checkedCallback, checked) {
         let p = document.createElement('p');
         let id = `${name}-${value}`;
 
@@ -8,6 +8,7 @@ class WizardRadioInput {
         input.setAttribute('name', name);
         input.setAttribute('value', value);
         input.setAttribute('id', id);
+        input.checked = checked === value;
         input.addEventListener('change', checkedCallback)
         p.appendChild(input);
 

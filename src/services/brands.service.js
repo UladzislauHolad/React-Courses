@@ -1,11 +1,20 @@
 class BrandsService {
+    constructor() {
+        this.checked = undefined;
+    }
+
     getData() {
-        let name = 'brand';
-        let data = [
-            { name: name, value: 'Ford' },
-            { name: name, value: 'BMW' },
-            { name: name, value: 'Audi' },
-        ]
+        let data = {
+            title: 'Выберите марку',
+            radios: true,
+            checked: this.checked,
+            name: 'brand',
+            values:[
+                { value: 'Ford' },
+                { value: 'BMW' },
+                { value: 'Audi' }
+            ]
+        }
 
         return data;
     }

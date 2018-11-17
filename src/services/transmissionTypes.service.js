@@ -1,10 +1,19 @@
 class TransmissionTypesService {
+    constructor() {
+        this.checked = undefined;
+    }
+
     getData() {
-        let name = 'transmission';
-        let data = [
-            { name: name, value: 'АКП'},
-            { name: name, value: 'МКП'}
-        ]
+        let data = {
+            title: 'Выберите вид трансмиссии',
+            radios: true,
+            checked: this.checked,
+            name: 'transmission',
+            values: [
+                { value: 'АКП' },
+                { value: 'МКП' }
+            ]
+        }
 
         return data;
     }

@@ -1,10 +1,19 @@
 class FuelTypesService {
+    constructor() {
+        this.checked = undefined;
+    }
+
     getData() {
-        let name = 'fuel';
-        let data = [
-            { name: name, value: 'бензин' },
-            { name: name, value: 'дизель' }
-        ]
+        let data = {
+            title: 'Выберите тип топлива',
+            radios: true,
+            checked: this.checked,
+            name: 'fuel',
+            values: [
+                { value: 'бензин' },
+                { value: 'дизель' }
+            ]
+        }
 
         return data;
     }

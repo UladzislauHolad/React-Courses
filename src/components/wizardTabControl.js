@@ -4,7 +4,6 @@ class WizardTabControl {
         this.node = document.createElement('button');
         this.node.appendChild(text);
         this.isHidden = true;
-        this.node.addEventListener('click', (e) => console.log(e));
     }
 
     disable() {
