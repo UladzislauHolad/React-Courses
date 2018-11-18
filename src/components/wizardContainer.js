@@ -2,9 +2,12 @@ class WizardContainer extends WizardNode {
     constructor(tag, classname, nextCallback, prevCallback, inputCallback) {
         super(tag, classname);
         this.tab = new WizardTab('div', 'tab', inputCallback);
+
         this.tabContainer = this.addContainer('tab-container');
         this.tabContainer.appendChild(this.tab.mainNode);
+        
         this.ctrlContainer = this.addContainer('btn-container');
+        
         this.prevBtn = this.addControl('prev-btn', 'Prev', prevCallback);
         this.nextBtn = this.addControl('next-btn', 'Next', nextCallback);   
     }
