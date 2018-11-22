@@ -11,6 +11,7 @@ class Header {
             a.appendChild(document.createTextNode(name));
             a.setAttribute('href', '#');
             a.setAttribute('id', name);
+            
             li.appendChild(a);
             li.addEventListener('click', callback);
             li.addEventListener('click', (e) => this.setActive(e.target.id));

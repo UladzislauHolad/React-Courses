@@ -1,4 +1,4 @@
-const url = 'https://newsapi.org/v2/everything';//q=sport&apiKey=';
+const url = 'https://newsapi.org/v2/everything';
 const API_KEY = '2a527d3a8ec34f62b78c5951fb9f6129';
 
 class NewsService {
