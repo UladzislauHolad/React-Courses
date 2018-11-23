@@ -11,7 +11,7 @@ class Header {
             a.appendChild(document.createTextNode(name));
             a.setAttribute('href', '#');
             a.setAttribute('id', name);
-            
+
             li.appendChild(a);
             li.addEventListener('click', callback);
             li.addEventListener('click', (e) => this.setActive(e.target.id));
@@ -21,12 +21,12 @@ class Header {
 
     setActive(id) {
         const activeClassname = 'active';
-        const actives = this._header.querySelectorAll('.active');
+        const actives = this._header.querySelectorAll(`.${activeClassname}`);
         actives.forEach(element => {
             element.classList.remove(activeClassname);
         })
 
-        const active = document.getElementById(id);
+        const active = this._header.querySelector(`#${id}`);
         active.classList.add(activeClassname);
     }
 }
