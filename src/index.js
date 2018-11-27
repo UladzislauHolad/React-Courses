@@ -9,15 +9,17 @@ import getData from './services/data.service.js';
         dataSource: getData(),
         marker: {
             color: 'blue',
-            radius: 4,
-            callback: (e) => console.log(e.target),
-            transform: (x,y) => `translate(0, ${300 - 2*y})`
+            radius: 4
         },
         line: {
             strokeWidth: 2,
-            stroke: 'red',
-            transform: (x,y) => `translate(0, ${300 - 2*y})`
-        }
+            stroke: 'red'
+        },
+        axis: {
+            stroke: 'black',
+            strokeWidth: '3px'
+        },
+        title: 'Number of code strings per day'
     }
 
     new XYChart(options);

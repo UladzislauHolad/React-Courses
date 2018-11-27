@@ -1,4 +1,21 @@
+#container {
+    padding: 30px;
+}
+
 #container svg line {
     stroke: blueviolet;
     stroke-width: 2;
+}
+
+#label {
+    position: absolute;
+    background-color: rgb(235, 225, 86);
+    border: 1px solid rgb(141, 125, 114);
+    border-radius: 5px;
+    text-align: center;
+    padding: 0 5px;
+}
+
+svg circle {
+    cursor: pointer;
 }

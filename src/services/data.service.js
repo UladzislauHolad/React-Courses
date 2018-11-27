@@ -1,28 +1,32 @@
 const data = [
     {
-        x: 10,
-        y: 5
+        value: 50,
+        label: 'Mon'
     },
     {
-        x: 40,
-        y: 20
+        value: 10,
+        label: 'Tue'
     },
     {
-        x: 80,
-        y: 50
+        value: 23,
+        label: 'Wed'
     },
     {
-        x: 120,
-        y: 20
+        value: 53,
+        label: 'Thu'
     },
     {
-        x: 160,
-        y: 10
+        value: 32,
+        label: 'Fri'
     },
     {
-        x: 200,
-        y: 30
+        value: 98,
+        label: 'Sat'    
     },
+    {
+        value: 11,
+        label: 'Sun'
+    }
 ]
 
 function getData() {
