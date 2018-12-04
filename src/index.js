@@ -1,15 +1,13 @@
-const canvas = document.createElement('canvas');
-canvas.height = 300;
-canvas.width = 400;
+import Cropper from './components/cropper.js'
+import Circle from './components/circle.js'
 
-const context = canvas.getContext('2d');
+const croppedImg = document.getElementById('cropped-img');
 
-const img = new Image();
-img.onload = function() {
-    context.drawImage(img, 0, 0, canvas.width, canvas.height);
-}
+const cropper = new Cropper('container', new Circle);
+cropper.init();
+cropper.loadImg('./avabomb.png');
 
-const container = document.getElementById('container');
-container.appendChild(canvas);
-
-img.src = './avabomb.png';
+const cropBtn = document.getElementById('crop-btn');
+cropBtn.addEventListener('click', () => {
+    croppedImg.src = cropper.crop();
+});
