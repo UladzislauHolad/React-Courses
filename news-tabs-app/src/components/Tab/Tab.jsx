@@ -1,8 +1,8 @@
 import React from 'react';
-import Articles from '../Articles/Articles';
-import TabControl from '../TabControl/TabControl';
-import {getArticles} from '../../services/articlesService';
-import Loader from '../Loader/Loader';
+import Articles from '../Articles';
+import TabControl from './TabControl';
+import * as ArticleService from '../../services/articlesService';
+import Loader from '../Loader';
 
 
 class Tab extends React.Component {
@@ -16,13 +16,11 @@ class Tab extends React.Component {
             loading: true
         });
         this.changeActiveBtnState(query)
-        getArticles(query).then(data => {
-            setTimeout(() => { 
-                this.setState({
-                    articles: data,
-                    loading: false
-                });
-            },3000);    
+        ArticleService.getArticles(query).then(data => {
+            this.setState({
+                articles: data.articles,
+                loading: false
+            });
         });
     }
 

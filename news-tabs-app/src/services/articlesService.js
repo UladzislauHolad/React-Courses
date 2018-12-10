@@ -1,33 +1,10 @@
-const sport = [
-    {title: 'sport1', description: 'desc1', link: '#'},
-    {title: 'sport2', description: 'desc2'},
-    {title: 'sport3', description: 'desc3'},
-    {title: 'sport41', description: 'desc4'}
-];
-
-const art = [
-    {title: 'art1', description: 'desc1'},
-    {title: 'art2', description: 'desc2'},
-    {title: 'art3', description: 'desc3'},
-    {title: 'art41', description: 'desc4'}
-];
-
-const auto = [
-    {title: 'auto1', description: 'desc1'},
-    {title: 'auto2', description: 'desc2'},
-    {title: 'auto3', description: 'desc3'},
-    {title: 'auto41', description: 'desc4'}
-];
-
-
+const url = 'https://newsapi.org/v2/everything';
+const API_KEY = '2a527d3a8ec34f62b78c5951fb9f6129';
 
 function getArticles(query) {
-    let articles;
-    if(query === 'sport') articles = sport;
-    if(query === 'art') articles = art;
-    if(query === 'auto') articles = auto;
-    
-    return Promise.resolve(articles);
+    return fetch(`${url}?q=${query}&apiKey=${API_KEY}`).then((response) => {
+        return response.json();
+    })
 }
 
 export {getArticles};
