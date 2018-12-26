@@ -2,9 +2,10 @@ import React from 'react';
 import { Button, ButtonGroup } from 'reactstrap';
 import { IButton } from '../../../models/IButton';
 
+
 export interface ITabControlProps {
   buttons: IButton[],
-  onClick: Function
+  onClickHandler: Function
 }
 
 const TabControl = (props: ITabControlProps) => {
@@ -14,7 +15,7 @@ const TabControl = (props: ITabControlProps) => {
         {props.buttons.map((button: any) => (
           <Button key={button.query}
             color="success"
-            onClick={props.onClick(button.query)}
+            onClick={props.onClickHandler(button.query)}
             active={button.isActive}
           >
             {button.name}
@@ -24,5 +25,6 @@ const TabControl = (props: ITabControlProps) => {
     </div>
   );
 }
+
 
 export default TabControl;

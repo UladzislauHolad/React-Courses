@@ -2,6 +2,7 @@ import React from 'react';
 import './Article.css'
 import { IArticle } from '../../../models/IArticle';
 
+
 export interface IArticleProps {
   article: IArticle
 }
@@ -19,5 +20,6 @@ const Article = (props: IArticleProps) => {
         </div>
     );
 }
+
 
 export default Article;
