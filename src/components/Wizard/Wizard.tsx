@@ -4,19 +4,37 @@ import WizardOptions from './WizardOptions';
 import WizardControl from './WizardControl';
 import WizardSummary from './WizardSummary';
 import './Wizard.css';
+import { IStep } from '../../models/IStep';
+import { IStepOption } from '../../models/IStepOption';
 
 
-class Wizard extends React.Component {
-  state = {
+interface IStepState {
+  id: number,
+  label?: string,
+  isSummary?: boolean,
+  value?: string
+}
+
+interface IWizardState {
+  currentStepId: number,
+  stepsStates: IStepState[]
+}
+
+interface IWizardProps {
+  steps: IStep[]
+}
+
+class Wizard extends React.Component<IWizardProps, IWizardState> {
+  public state = {
     currentStepId: this.getFirstStep(),
     stepsStates: this.getStepsStates()
   };
 
-  getFirstStep() {
+  private getFirstStep(): number {
     return this.props.steps[0].id;
   }
 
-  getStepsStates() {
+  private getStepsStates(): IStepState[] {
     const stepsStates = this.props.steps.map((step) => {
       return {
         id: step.id,
@@ -28,28 +46,28 @@ class Wizard extends React.Component {
     return stepsStates;
   }
 
-  handleNextStep = () => {
+  private handleNextStep = () => {
     const nextStepId = this.getNextStepId();
     this.setCurrentStepId(nextStepId);
     this.checkOptions(nextStepId);
   }
 
-  handlePrevStep = () => {
+  private handlePrevStep = () => {
     const prevStepId = this.getPrevStepId();
     this.setCurrentStepId(prevStepId);
   }
 
-  handleOptionChange = (value) => () => {
+  private handleOptionChange = (value: string) => () => {
     this.setStepValue(this.state.currentStepId, value);
   }
 
-  setCurrentStepId(newStepId) {
+  private setCurrentStepId(newStepId: number) {
     this.setState({
       currentStepId: newStepId
     });
   }
 
-  setStepValue(stepId, value) {
+  private setStepValue(stepId: number, value: string) {
     this.setState({
       stepsStates: this.state.stepsStates.map((state) => {
         if (state.id === stepId) {
@@ -60,36 +78,36 @@ class Wizard extends React.Component {
     });
   }
 
-  checkOptions(stepId) {
+  private checkOptions(stepId: number) {
     const step = this.getStep(stepId);
-    if(step.isSummary){
+    if (step.isSummary) {
       return;
     }
 
-    const options = this.getOptions(stepId);
+    const options = this.getStepOptions(stepId);
     const stepValue = this.state.stepsStates.find(x => x.id === stepId).value;
     const isParentChanged = !options.some(x => x.value === stepValue);
-    
-    if(isParentChanged && stepValue) {
+
+    if (isParentChanged && stepValue) {
       this.setStepValue(stepId, undefined);
     }
   }
 
-  getPrevStepId() {
+  private getPrevStepId(): number {
     const prevStepId = this.getStep(this.state.currentStepId).prev;
     return prevStepId;
   }
 
-  getNextStepId() {
+  private getNextStepId(): number {
     const nextStepId = this.getStep(this.state.currentStepId).next;
     return nextStepId;
   }
 
-  getStep(stepId) {
+  private getStep(stepId: number): IStep {
     return this.props.steps.find(x => x.id === stepId);
   }
 
-  getOptions(stepId) {
+  private getStepOptions(stepId: number): IStepOption[] {
     const step = this.getStep(stepId);
     if (!step.parent) {
       return step.values;
@@ -97,22 +115,22 @@ class Wizard extends React.Component {
 
     const parentValue = this.state.stepsStates.find(x => x.id === step.parent).value;
     const options = step.values.filter(x => x.parentValue === parentValue);
-  
+
     return options;
   }
 
-  getStepState(stepId) {
+  private getStepState(stepId: number): IStepState {
     return this.state.stepsStates.find(x => x.id === stepId);
   }
 
-  getSummary() {
+  private getSummary(): IStepState[] {
     return this.state.stepsStates.filter(x => !x.isSummary);
   }
 
-  render() {
+  public render() {
     const currentStep = this.getStep(this.state.currentStepId);
     const currentStepState = this.getStepState(this.state.currentStepId);
-    const currentOptions = this.getOptions(this.state.currentStepId);
+    const currentOptions = this.getStepOptions(this.state.currentStepId);
 
     return (
       <div className="wizard">
@@ -120,11 +138,11 @@ class Wizard extends React.Component {
         {currentStep.isSummary ? (
           <WizardSummary items={this.getSummary()} />
         ) : (
-          <WizardOptions
-            options={currentOptions}
-            selected={currentStepState.value}
-            handleOptionChange={this.handleOptionChange} />
-        )}
+            <WizardOptions
+              options={currentOptions}
+              selected={currentStepState.value}
+              optionChangeHandler={this.handleOptionChange} />
+          )}
         <WizardControl
           handlePrev={this.handlePrevStep}
           handleNext={this.handleNextStep}
@@ -135,5 +153,6 @@ class Wizard extends React.Component {
     );
   }
 }
+
 
 export default Wizard;

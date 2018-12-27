@@ -1,4 +1,6 @@
-const steps = [
+import { IStep } from "../models/IStep";
+
+const steps: IStep[] = [
   {
     id: 1,
     next: 2,
