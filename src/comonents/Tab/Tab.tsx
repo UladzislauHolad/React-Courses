@@ -18,12 +18,18 @@ interface ITabProps {
 }
 
 class Tab extends React.Component<ITabProps, ITabState> {
-  state: ITabState = {
+  public state: ITabState = {
     articles: [],
     loading: false,
   }
 
-  getArticles = (query: string) => () => {
+  public componentDidMount() {
+    const query = this.props.buttons[0].query;
+
+    this.getArticles(query)();
+  }
+
+  private getArticles = (query: string) => () => {
     this.setState({
       loading: true
     });
@@ -36,7 +42,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
     });
   }
 
-  changeActiveBtnState(query: string) {
+  private changeActiveBtnState(query: string) {
     const newActiveBtn = this.props.buttons.find(x => x.query === query);
 
     if (newActiveBtn && this.isActiveBtnChanged(newActiveBtn)) {
@@ -49,7 +55,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
     }
   }
 
-  deactiveCurrent() {
+  private deactiveCurrent() {
     const activeBtn = this.state.activeBtn;
     if (activeBtn) {
       const currentActiveBtn = this.props.buttons.find(x =>
@@ -61,7 +67,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
     }
   }
 
-  isActiveBtnChanged(newActiveBtn: IButton) {
+  private isActiveBtnChanged(newActiveBtn: IButton) {
     const currentActiveBtn = this.state.activeBtn;
 
     if (!currentActiveBtn) {
@@ -71,7 +77,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
     return newActiveBtn.query !== currentActiveBtn.query
   }
 
-  render() {
+  public render() {
     return (
       <React.Fragment>
         <div className="tab-header">

@@ -3,7 +3,7 @@ import './Article.css'
 import { IArticle } from '../../../models/IArticle';
 
 
-export interface IArticleProps {
+interface IArticleProps {
   article: IArticle
 }
 

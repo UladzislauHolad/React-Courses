@@ -3,7 +3,7 @@ import Article from './Article';
 import { IArticle } from '../../models/IArticle';
 
 
-export interface IArticlesProps {
+interface IArticlesProps {
   articles: IArticle[]
 }
 

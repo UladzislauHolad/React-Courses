@@ -3,7 +3,7 @@ import { Button, ButtonGroup } from 'reactstrap';
 import { IButton } from '../../../models/IButton';
 
 
-export interface ITabControlProps {
+interface ITabControlProps {
   buttons: IButton[],
   onClickHandler: Function
 }
