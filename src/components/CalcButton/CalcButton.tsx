@@ -8,7 +8,11 @@ interface ICalcButtonProps {
 const CalcButton: FC<ICalcButtonProps> = (props) => {
     const {label} = props;
 
-    return <Button variant="contained" onClick={()=> console.log(label)}>{label}</Button>
+    return <Button 
+        variant="contained" 
+        onClick={()=> console.log(label)}
+        fullWidth
+      >{label}</Button>
 }
 
 export default CalcButton;
