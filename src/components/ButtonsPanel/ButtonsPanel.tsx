@@ -4,16 +4,17 @@ import { Grid } from '@material-ui/core';
 import CalcButton from '../CalcButton/CalcButton';
 
 interface IButtonsPanelProps {
-  buttons: IButtonInfo[]
+  buttonsInfo: IButtonInfo[],
+  handleClick: any
 }
 
 const ButtonsPanel: FC<IButtonsPanelProps> = (props) => {
-  const { buttons } = props;
+  const { buttonsInfo, handleClick } = props;
 
   return <Fragment>
-    {buttons.map((button) => {
-      return <Grid key={button.label} item xs={3}>
-        <CalcButton label={button.label} />
+    {buttonsInfo.map((buttonInfo) => {
+      return <Grid key={buttonInfo.label} item xs={3}>
+        <CalcButton handleClick={handleClick} buttonInfo={buttonInfo} />
       </Grid>
     })}
   </Fragment>

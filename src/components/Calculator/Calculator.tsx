@@ -1,8 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, Dispatch } from 'react';
 import { Grid, TextField } from '@material-ui/core';
-import CalcButton from '../CalcButton/CalcButton';
 import buttons from '../../collections/ButtonsCollection';
 import ButtonsPanel from '../ButtonsPanel/ButtonsPanel';
+import { connect } from 'react-redux';
+import { IState } from '../../interfaces/IState';
+import { Action } from 'redux';
+import { IButtonInfo } from '../../interfaces/IButtonInfo';
+
+// interface ICalculatorProps {
+//   output: string,
+//   select: 
+// }
 
 const styles = {
   container: {
@@ -19,7 +27,10 @@ const styles = {
   }
 }
 
-const Calculator: FC = () => {
+const Calculator: FC = (props: any) => {
+  const { output, select } = props;
+  const handleClick = (buttonInfo:IButtonInfo) => select(buttonInfo);
+
   return <div style={styles.container}>
     <Grid container xs={12} spacing={16} style={styles.mainGrid}>
       <Grid item xs={12}>
@@ -27,13 +38,28 @@ const Calculator: FC = () => {
           variant="outlined"
           fullWidth
           InputProps={{
-            readOnly: true
+            readOnly: true,
+            value: output
           }}
         />
       </Grid>
-      <ButtonsPanel buttons={buttons} />
+      <ButtonsPanel handleClick={handleClick} buttonsInfo={buttons} />
     </Grid>
   </div>
 }
 
-export default Calculator;
+const mapStateToProps = (state:IState)/*: ICalculatorProps*/ => {
+  return {
+      output: state.output
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    select: (buttonInfo: IButtonInfo) => {
+      dispatch({type: buttonInfo.type, label: buttonInfo.label})
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calculator);

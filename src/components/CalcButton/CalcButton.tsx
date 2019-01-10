@@ -1,18 +1,20 @@
 import React, { FC } from 'react';
 import { Button } from '@material-ui/core';
+import { IButtonInfo } from '../../interfaces/IButtonInfo';
 
 interface ICalcButtonProps {
-    label: string,
+    buttonInfo: IButtonInfo
+    handleClick: any
 }
 
 const CalcButton: FC<ICalcButtonProps> = (props) => {
-    const {label} = props;
+    const { buttonInfo, handleClick} = props;
 
     return <Button 
         variant="contained" 
-        onClick={()=> console.log(label)}
+        onClick={() => handleClick(buttonInfo)}
         fullWidth
-      >{label}</Button>
+      >{buttonInfo.label}</Button>
 }
 
 export default CalcButton;
