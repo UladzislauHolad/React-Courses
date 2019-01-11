@@ -5,7 +5,7 @@ import CalcButton from '../CalcButton/CalcButton';
 
 interface IButtonsPanelProps {
   buttonsInfo: IButtonInfo[],
-  handleClick: any
+  handleClick: (buttonInfo: IButtonInfo) => void
 }
 
 const ButtonsPanel: FC<IButtonsPanelProps> = (props) => {

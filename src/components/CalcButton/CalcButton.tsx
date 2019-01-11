@@ -4,7 +4,7 @@ import { IButtonInfo } from '../../interfaces/IButtonInfo';
 
 interface ICalcButtonProps {
     buttonInfo: IButtonInfo
-    handleClick: any
+    handleClick: (buttonInfo: IButtonInfo) => void
 }
 
 const CalcButton: FC<ICalcButtonProps> = (props) => {

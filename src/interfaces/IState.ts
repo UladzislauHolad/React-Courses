@@ -1,3 +1,8 @@
+import { Operations } from "../Enums/Operations";
+
 export interface IState {
-    output: string
+  output: string,
+  isMustBeClear: boolean,
+  operation?: Operations,
+  firstNumber?: number
 }
