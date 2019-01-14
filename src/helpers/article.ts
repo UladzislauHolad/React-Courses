@@ -1,6 +1,14 @@
-import { SortDirections } from "../enums/sortDirections";
 import { IArticle } from "../interfaces/IArticle";
-import { filterByTerm } from "./articlesFilterHelper";
+import { SortDirections } from "../enums/sortDirections";
+
+export const filterByTerm = (articles: IArticle[], searchTerm: string): IArticle[] => {
+    return searchTerm === '' 
+        ? articles
+        : articles.filter((article) => {
+            const searchArea = (article.title + article.description).toLowerCase();
+            return searchArea.includes(searchTerm.toLowerCase())
+        })
+}
 
 export const sortByDirection = (articles: IArticle[], direction: SortDirections): IArticle[] => {
     switch(direction) {

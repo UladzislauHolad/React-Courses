@@ -2,26 +2,26 @@ import React, { FC } from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { ISource } from '../interfaces/ISource';
 import { connect } from 'react-redux';
-import { changeSource, load } from '../actions';
+import { changeSource, loadArticles } from '../actions';
 
 interface IState { sourceId: string }
 interface IStateProps { sourceId:string }
 interface IDispatchProps { 
     changeSource: (sourceId: string) => void;
-    load: (sourceId: string) => void;
+    loadArticles: (sourceId: string) => void;
 }
 interface IOwnProps { sources: ISource[] }
 
 type IProps = IStateProps & IDispatchProps & IOwnProps;
 
 const Filter: FC<IProps> = (props) => {
-    const { sources, sourceId, changeSource, load } = props;
+    const { sources, sourceId, changeSource, loadArticles } = props;
 
     const handleChange = (event: React.ChangeEvent<{}>) => {
         const sourceId = (event.target as HTMLInputElement).value;
 
         changeSource(sourceId);
-        load(sourceId);
+        loadArticles(sourceId);
     }
 
     return <FormControl margin="normal" fullWidth>
@@ -51,7 +51,7 @@ const mapStateToProps = (state: IState): IStateProps => {
 
 const mapDispatchToProps: IDispatchProps = { 
     changeSource,
-    load
+    loadArticles: loadArticles
 };
 
 export default connect<IStateProps, IDispatchProps, IOwnProps, IState>(

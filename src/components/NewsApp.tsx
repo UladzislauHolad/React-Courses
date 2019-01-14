@@ -1,4 +1,4 @@
-import React, { FC, Component, ReactNode } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Grid, LinearProgress } from '@material-ui/core';
 import SearchInput from './SearchInput';
 import Filter from './SourceSelector';
@@ -9,7 +9,7 @@ import { IArticle } from '../interfaces/IArticle';
 import { connect } from 'react-redux';
 import { SortDirections } from '../enums/sortDirections';
 import { sortByDirection, filterByTerm } from '../helpers';
-import { load } from '../actions';
+import { loadArticles } from '../actions';
 
 interface IState {
     articles: {
@@ -25,7 +25,7 @@ interface IStateProps {
     sortDirection: SortDirections;
 }
 interface IDispatchProps {
-    load: () => void;
+    loadArticles: () => void;
 }
 
 type IProps = IStateProps & IDispatchProps;
@@ -39,7 +39,7 @@ const styles = {
 class NewsApp extends Component<IProps> {
 
     public componentDidMount() {
-        this.props.load()
+        this.props.loadArticles()
     }
 
     public render(): ReactNode {
@@ -68,7 +68,7 @@ const mapStateToProps = ({ articles, sortDirection, searchTerm }: IState): IStat
     }
 }
 
-const mapDispatchToProps = { load };
+const mapDispatchToProps = { loadArticles: loadArticles };
 
 export default connect(
     mapStateToProps,

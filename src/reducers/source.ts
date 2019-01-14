@@ -1,5 +1,5 @@
 import { SourceActions } from "../actions";
-import { load } from "../actions/article";
+import { loadArticles } from "../actions/article";
 
 export type SourceState = string;
 

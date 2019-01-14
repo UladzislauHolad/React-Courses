@@ -8,9 +8,11 @@ interface IProps {
 
 const styles = {
     media: {
-        height: 140,
+        height: 300
     }
 }
+
+const noImageUrl = 'https://cdn.dribbble.com/users/55871/screenshots/2158022/no_photo_1x.jpg'
 
 const NewsContent: FC<IProps> = (props) => {
     const { articles } = props;
@@ -21,7 +23,7 @@ const NewsContent: FC<IProps> = (props) => {
                     <CardActionArea onClick={() => window.open(article.url, "_blank")}>
                         <CardMedia
                             style={styles.media}
-                            image={article.urlToImage}
+                            image={!!article.urlToImage ? article.urlToImage : noImageUrl}
                             title={article.title}
                         />
                         <CardContent>
