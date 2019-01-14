@@ -4,21 +4,19 @@ import { SortDirections } from '../enums/sortDirections';
 import { changeSortDirection } from '../actions';
 import { connect } from 'react-redux';
 
-interface IState { direction: SortDirections }
-interface IStateProps { direction: SortDirections }
 interface IDispatchProps {
     changeSortDirection: (direction: SortDirections) => void
 }
+interface IOwnProps { direction: SortDirections }
 
-type IProps = IStateProps & IDispatchProps;
-
+type IProps = IOwnProps & IDispatchProps;
 
 const SortSelector: FC<IProps> = (props) => {
     const { direction } = props;
 
     const handleChange = (event: React.ChangeEvent<{}>) => {
         const value: string = (event.target as HTMLInputElement).value;
-        debugger
+        
         props.changeSortDirection(value as SortDirections);
     }
     return <FormControl margin="normal">
@@ -44,16 +42,9 @@ const SortSelector: FC<IProps> = (props) => {
     </FormControl>
 }
 
-const mapStateToProps = ({ direction }: IState): IStateProps => {
-    debugger
-    return {
-        direction
-    }
-}
+const mapDispatchToProps: IDispatchProps = { changeSortDirection };
 
-const mapDispatchToProps = { changeSortDirection };
-
-export default connect<IStateProps, IDispatchProps, {}, IState>(
-    mapStateToProps,
+export default connect<{}, IDispatchProps>(
+    null,
     mapDispatchToProps
 )(SortSelector);

@@ -1,10 +1,12 @@
 import sortReducer, { SortState } from "./sort";
+import sourceReducer, { SourceState } from "./source";
 import { combineReducers } from "redux";
-
-export interface IStoreState {
-    sort: SortState
-}
+import articlesReducer, { ArticlesState } from "./articles";
+import searchReducer, { SearchState } from "./search";
 
 export default combineReducers({
-    direction: sortReducer
+    sortDirection: sortReducer,
+    sourceId: sourceReducer,
+    articles: articlesReducer,
+    searchTerm: searchReducer
 });

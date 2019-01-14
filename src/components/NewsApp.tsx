@@ -1,17 +1,76 @@
-import React, { FC } from 'react';
-import { Grid } from '@material-ui/core';
+import React, { FC, Component, ReactNode } from 'react';
+import { Grid, LinearProgress } from '@material-ui/core';
 import SearchInput from './SearchInput';
-import Filter from './Filter';
+import Filter from './SourceSelector';
 import SortSelector from './SortSelector';
 import NewsContent from './NewsContent';
+import { sources } from '../collections/sources';
+import { IArticle } from '../interfaces/IArticle';
+import { connect } from 'react-redux';
+import { SortDirections } from '../enums/sortDirections';
+import { sortByDirection, filterByTerm } from '../helpers';
+import { load } from '../actions';
 
-const NewsApp: FC = () => {
-    return <Grid container spacing={8}>
-        <Grid item xs={12} sm={4}><SearchInput /></Grid>
-        <Grid item xs={12} sm={4}><Filter /></Grid>
-        <Grid item xs={12} sm={4}><SortSelector /></Grid>
-        {/* <Grid container item spacing={8}><NewsContent /></Grid> */}
-    </Grid>
+interface IState {
+    articles: {
+        articles?: IArticle[];
+        isLoading: boolean
+    },
+    sortDirection: SortDirections,
+    searchTerm: string
+}
+interface IStateProps {
+    articles?: IArticle[];
+    isLoading: boolean;
+    sortDirection: SortDirections;
+}
+interface IDispatchProps {
+    load: () => void;
 }
 
-export default NewsApp;
+type IProps = IStateProps & IDispatchProps;
+
+const styles = {
+    progressRoot: {
+        flexGrow: 1
+    }
+}
+
+class NewsApp extends Component<IProps> {
+
+    public componentDidMount() {
+        this.props.load()
+    }
+
+    public render(): ReactNode {
+        return <Grid container spacing={8}>
+            <Grid item xs={12} sm={4}><SearchInput /></Grid>
+            <Grid item xs={12} sm={4}><Filter sources={sources} /></Grid>
+            <Grid item xs={12} sm={4}><SortSelector direction={this.props.sortDirection} /></Grid>
+            <Grid container item spacing={8}>
+                {this.props.isLoading
+                    ? <div style={styles.progressRoot}>
+                        <LinearProgress />
+                    </div>
+                    : <NewsContent articles={this.props.articles} />}
+            </Grid>
+        </Grid>
+    }
+}
+
+const mapStateToProps = ({ articles, sortDirection, searchTerm }: IState): IStateProps => {
+    return {
+        articles: !!articles.articles
+            ? sortByDirection(filterByTerm(articles.articles, searchTerm), sortDirection)
+            : undefined,
+        isLoading: articles.isLoading,
+        sortDirection
+    }
+}
+
+const mapDispatchToProps = { load };
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NewsApp);

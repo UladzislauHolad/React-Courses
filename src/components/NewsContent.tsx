@@ -1,5 +1,10 @@
 import React, { FC, Fragment } from 'react';
 import { Grid, Card, CardActions, Button, CardActionArea, CardContent, Typography, CardMedia } from '@material-ui/core';
+import { IArticle } from '../interfaces/IArticle';
+
+interface IProps {
+    articles?: IArticle[]
+}
 
 const styles = {
     media: {
@@ -7,38 +12,31 @@ const styles = {
     }
 }
 
-const NewsContent: FC = () => {
+const NewsContent: FC<IProps> = (props) => {
+    const { articles } = props;
     return <Fragment>
-        {[1, 2, 3, 4, 5, 1, 1, 11, 1, 1, 1, 1, 1, 1, , 1, 1].map((el) =>
-            <Grid key={el} item xs={12} sm={6} md={4}>
+        {!!articles ? articles.map((article) =>
+            <Grid key={article.url} item xs={12} sm={6} md={4}>
                 <Card>
-                    <CardActionArea>
+                    <CardActionArea onClick={() => window.open(article.url, "_blank")}>
                         <CardMedia
                             style={styles.media}
-                            image="/static/images/cards/contemplative-reptile.jpg"
-                            title="Contemplative Reptile"
+                            image={article.urlToImage}
+                            title={article.title}
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
-                                Lizard
-            </Typography>
+                                {article.title}
+                            </Typography>
                             <Typography component="p">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                across all continents except Antarctica
-            </Typography>
+                                {article.description}
+                            </Typography>
                         </CardContent>
                     </CardActionArea>
-                    <CardActions>
-                        <Button size="small" color="primary">
-                            Share
-          </Button>
-                        <Button size="small" color="primary">
-                            Learn More
-          </Button>
-                    </CardActions>
                 </Card>
             </Grid>
-        )}
+        )
+    : <Typography variant="h5"><em>No matches</em></Typography>}
     </Fragment>
 }
 
